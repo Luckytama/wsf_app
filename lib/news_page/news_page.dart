@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+
+final _maxTeaserBodyLength = 120;
 
 final _newsWidgets = <NewsWidget>[
   new NewsWidget(
@@ -70,7 +73,7 @@ class NewsWidget extends StatelessWidget {
   final String headline;
   final String body;
 
-  const NewsWidget({
+  NewsWidget({
     Key key,
     @required this.headline,
     @required this.body,
@@ -87,7 +90,7 @@ class NewsWidget extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     new Text(headline),
-                    new Text(body),
+                    new Text(_createTeaserBody()),
                   ],
                 ))));
   }
@@ -104,5 +107,15 @@ class NewsWidget extends StatelessWidget {
         body: Text(body),
       );
     }));
+  }
+
+  String _createTeaserBody() {
+    if (_maxTeaserBodyLength < body.length) {
+      String teaserBody = body.substring(0, _maxTeaserBodyLength);
+      teaserBody += "...";
+      return teaserBody;
+    } else {
+      return body;
+    }
   }
 }
