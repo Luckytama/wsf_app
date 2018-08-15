@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 final _maxTeaserBodyLength = 120;
+
 
 final _newsWidgets = <NewsWidget>[
   new NewsWidget(
@@ -56,10 +56,12 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listView = Container(child: _buildNewsWidgets());
+    final listView = Container(
+      child: _buildNewsWidgets(),
+    );
 
     final appBar = AppBar(
-      title: Text("WSF News"),
+      title: Text("WSF News", style: TextStyle(),),
     );
 
     return Scaffold(
@@ -85,14 +87,18 @@ class NewsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         child: Container(
+          decoration: new BoxDecoration(border: Border.all(color: Colors.grey)),
             child: InkWell(
                 onTap: () => _navigateToNewsScreen(context),
-                child: Column(
-                  children: <Widget>[
-                    new Text(headline),
-                    new Text(_createTeaserBody()),
-                  ],
-                ))));
+                child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(headline, style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold, ),),
+                        Text(_createTeaserBody()),
+                      ],
+                    )))));
   }
 
   void _navigateToNewsScreen(BuildContext context) {
