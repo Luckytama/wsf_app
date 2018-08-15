@@ -82,11 +82,27 @@ class NewsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         child: Container(
-            child: Column(
-      children: <Widget>[
-        new Text(headline),
-        new Text(body),
-      ],
-    )));
+            child: InkWell(
+                onTap: () => _navigateToNewsScreen(context),
+                child: Column(
+                  children: <Widget>[
+                    new Text(headline),
+                    new Text(body),
+                  ],
+                ))));
+  }
+
+  void _navigateToNewsScreen(BuildContext context) {
+    Navigator
+        .of(context)
+        .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+            title: Text(
+          headline,
+        )),
+        body: Text(body),
+      );
+    }));
   }
 }
